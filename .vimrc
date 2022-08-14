@@ -40,12 +40,20 @@ function BasicSetup()
 
   " backspace
   set backspace=indent,eol,start
+
+  " set split window at below
+  set splitbelow
 endfunction
 
 " Flutter format command
 function FlutterFormat_CurrentFile()
   if &filetype ==# 'dart'
-    !flutter format %:p
+    set autoread
+    " set nautoread
+    silent !flutter format %:p
+    "sleep 3
+    "redraw
+    "term flutter format %:p
   endif
 endfunction
 
@@ -92,8 +100,10 @@ function MappingSetup()
     " I key: go to the end of the line
     noremap <C-i> $
 
-    noremap <C-j> <C-f>
-    noremap <C-k> <C-b>
+    noremap <C-j> <C-f>5<C-y>z.
+    noremap <C-k> <C-b>5<C-e>z.
+
+    noremap <F12> :term<cr>
   endfunction
 
   function CustomFeatureMapping()
